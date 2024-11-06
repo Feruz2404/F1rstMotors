@@ -9,7 +9,7 @@ export class MailService {
   async sendMail(client: Client, OTP:string) {
     await this.mailerService.sendMail({
       to: client.email,
-      subject: 'Rent House appga xush kelibsiz',
+      subject: 'Welcome to F1rstMotors',
       template: './confirm',
       context: {
         full_name: client.full_name,

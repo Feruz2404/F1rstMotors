@@ -36,13 +36,14 @@ export class ClientGuard implements CanActivate {
         payload = await jwtService.verify(token, {
           secret: process.env.ACCESS_TOKEN_KEY,
         });
-
+        
       } catch (error) {
         payload = await jwtService.verify(token, {
           secret: process.env.ACCESS_TOKEN_ADMIN_KEY,
         });
       }
-
+      console.log(payload);
+      
       if (!payload) {
         throw new UnauthorizedException('Unauthorized client');
       }

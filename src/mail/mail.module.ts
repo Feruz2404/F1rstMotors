@@ -14,12 +14,12 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
           host: config.get<string>('SMTP_HOST'),
           secure: false,
           auth: {
-            client: config.get<string>('SMTP_USER'),
+            user: config.get<string>('SMTP_USER'),
             pass: config.get<string>('SMTP_PASSWORD'),
           },
         },
         defaults: {
-          from: `Stadium ${config.get<string>('SMTP_HOST')}`,
+          from: `F1rstMotors ${config.get<string>('SMTP_HOST')}`,
         },
         template: {
           dir: join(__dirname, 'templates'),

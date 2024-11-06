@@ -19,6 +19,7 @@ export class CartController {
     return this.cartService.create(createCartDto);
   }
 
+  @UseGuards(ClientGuard)
   @Get()
   @ApiOperation({ summary: 'Retrieve all items in the cart' })
   @ApiResponse({ status: 200, description: 'List of all items in the cart.', type: [Cart] })
@@ -26,6 +27,7 @@ export class CartController {
     return this.cartService.findAll();
   }
 
+  @UseGuards(ClientGuard)
   @Get(':id')
   @ApiOperation({ summary: 'Retrieve a specific item in the cart by ID' })
   @ApiResponse({ status: 200, description: 'Cart item found.', type: Cart })

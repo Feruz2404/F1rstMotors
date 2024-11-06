@@ -22,7 +22,8 @@ export class CarFinancingController {
     return this.carFinancingService.create(createCarFinancingDto);
   }
 
-
+  @UseGuards(AdminGuard)
+  @UseGuards(ClientGuard)
   @Get()
   @ApiOperation({ summary: 'Get all car financing records' })
   @ApiResponse({ status: 200, description: 'Returns all car financing records.' })
@@ -30,6 +31,8 @@ export class CarFinancingController {
     return this.carFinancingService.findAll();
   }
 
+  @UseGuards(AdminGuard)
+  @UseGuards(ClientGuard)
   @Get(':id')
   @ApiOperation({ summary: 'Get a car financing record by ID' })
   @ApiParam({ name: 'id', type: Number, description: 'ID of the car financing record' })

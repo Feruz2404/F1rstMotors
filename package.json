@@ -32,6 +32,7 @@
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "cookie-parser": "^1.4.7",
     "nest-winston": "^1.9.7",
     "otp-generator": "^4.0.1",
     "passport-jwt": "^4.0.1",
@@ -42,6 +43,7 @@
     "sequelize": "^6.37.5",
     "sequelize-typescript": "^2.1.6",
     "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.0.2",
     "winston": "^3.16.0"
   },
   "devDependencies": {

@@ -4,7 +4,7 @@ import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 export class VerifyOtpDto {
   @ApiProperty({
     example: 'hashed verification key',
-    description: 'You take verification_key in sugnup details',
+    description: 'You take verification_key in signup details',
   })
   @IsString()
   @IsNotEmpty()

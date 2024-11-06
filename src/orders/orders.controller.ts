@@ -6,19 +6,25 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './models/order.model';
 import { DriverGuard } from '../guards/driver.guard';
 import { UpdateOrderStatusDto } from './dto/update-order_status.dto';
+import { AdminGuard } from '../guards/admin.guard';
+import { ClientGuard } from '../guards/client.guard';
 
 @ApiTags('orders')
 @Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrderService) {}
 
+  @UseGuards(AdminGuard)
+  @UseGuards(ClientGuard)
   @Post()
   @ApiOperation({ summary: 'Create a new order' })
   @ApiResponse({ status: 201, description: 'Order created successfully.', type: Order })
   async create(@Body() createOrderDto: CreateOrderDto) {
     return this.ordersService.create(createOrderDto);
   }
-
+  
+  @UseGuards(AdminGuard)
+  @UseGuards(ClientGuard)
   @Get()
   @ApiOperation({ summary: 'Get all orders' })
   @ApiResponse({ status: 200, description: 'List of all orders.', type: [Order] })
@@ -26,6 +32,8 @@ export class OrdersController {
     return this.ordersService.findAll();
   }
 
+  @UseGuards(AdminGuard)
+  @UseGuards(ClientGuard)
   @Get(':id')
   @ApiOperation({ summary: 'Get an order by ID' })
   @ApiResponse({ status: 200, description: 'Order found.', type: Order })
@@ -34,6 +42,7 @@ export class OrdersController {
     return this.ordersService.findOne(+id);
   }
 
+  @UseGuards(AdminGuard)
   @Patch(':id')
   @ApiOperation({ summary: 'Update an order by ID' })
   @ApiResponse({ status: 200, description: 'Order updated successfully.', type: Order })
@@ -42,6 +51,7 @@ export class OrdersController {
     return this.ordersService.update(+id, updateOrderDto);
   }
 
+  @UseGuards(AdminGuard)
   @Delete(':id')
   @ApiOperation({ summary: 'Delete an order by ID' })
   @ApiResponse({ status: 200, description: 'Order deleted successfully.' })

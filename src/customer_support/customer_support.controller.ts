@@ -5,6 +5,7 @@ import { CreateCustomerSupportDto } from './dto/create-customer_support.dto';
 import { UpdateCustomerSupportDto } from './dto/update-customer_support.dto';
 import { CustomerSupport } from './models/customer_support.model';
 import { AdminGuard } from '../guards/admin.guard';
+import { ClientGuard } from '../guards/client.guard';
 
 @ApiTags('customer-support')
 @Controller('customer-support')
@@ -19,6 +20,7 @@ export class CustomerSupportController {
       return this.customerSupportService.create(createCustomerSupportDto);
   }
 
+  @UseGuards(ClientGuard)
   @Get()
   @ApiOperation({ summary: 'Retrieve all customer support requests' })
   @ApiResponse({ status: 200, description: 'List of all support requests.', type: [CustomerSupport] })
@@ -26,6 +28,7 @@ export class CustomerSupportController {
       return this.customerSupportService.findAll();
   }
 
+  @UseGuards(ClientGuard)
   @Get(':id')
   @ApiOperation({ summary: 'Retrieve a customer support request by ID' })
   @ApiResponse({ status: 200, description: 'Support request record found.', type: CustomerSupport })

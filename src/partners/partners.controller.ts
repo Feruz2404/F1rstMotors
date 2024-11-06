@@ -1,15 +1,17 @@
-import { Body, Controller, Delete, Get, Param, Post, Patch } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Patch, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { PartnersService } from './partners.service';
 import { CreatePartnerDto } from './dto/create-partner.dto';
 import { UpdatePartnerDto } from './dto/update-partner.dto';
 import { Partner } from './models/partner.model';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('partners')
 @Controller('partners')
 export class PartnersController {
     constructor(private readonly partnersService: PartnersService) {}
 
+    @UseGuards(AdminGuard)
     @Post()
     @ApiOperation({ summary: 'Create a new partner' })
     @ApiResponse({ status: 201, description: 'The partner has been successfully created.', type: Partner })
@@ -18,6 +20,7 @@ export class PartnersController {
         return this.partnersService.create(createPartnerDto);
     }
 
+    @UseGuards(AdminGuard)
     @Get()
     @ApiOperation({ summary: 'Get all partners' })
     @ApiResponse({ status: 200, description: 'Retrieve all partners.', type: [Partner] })
@@ -25,6 +28,7 @@ export class PartnersController {
         return this.partnersService.findAll();
     }
 
+    @UseGuards(AdminGuard)
     @Get(':id')
     @ApiOperation({ summary: 'Get a partner by ID' })
     @ApiParam({ name: 'id', type: 'string', description: 'ID of the partner to retrieve' })
@@ -34,6 +38,7 @@ export class PartnersController {
         return this.partnersService.findOne(+id);
     }
 
+    @UseGuards(AdminGuard)
     @Patch(':id')
     @ApiOperation({ summary: 'Update a partner by ID' })
     @ApiParam({ name: 'id', type: 'string', description: 'ID of the partner to update' })
@@ -43,6 +48,7 @@ export class PartnersController {
         return this.partnersService.update(+id, updatePartnerDto);
     }
 
+    @UseGuards(AdminGuard)
     @Delete(':id')
     @ApiOperation({ summary: 'Delete a partner by ID' })
     @ApiParam({ name: 'id', type: 'string', description: 'ID of the partner to delete' })

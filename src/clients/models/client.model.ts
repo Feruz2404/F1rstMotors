@@ -2,6 +2,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { Order } from "../../orders/models/order.model";
 import { CarFinancing } from "../../car_financing/models/car_financing.entity";
+import { Notification } from "../../notifications/models/notification.model";
+import { Cart } from "../../cart/models/cart.model";
 
 interface IClientCreationAttr {
   full_name: string;
@@ -87,4 +89,10 @@ export class Client extends Model<Client, IClientCreationAttr> {
 
   @HasMany(() => CarFinancing)
   car_financing: CarFinancing[]
+
+  @HasMany(() => Notification)
+  notifications: Notification[]
+
+  @HasMany(() => Cart)
+  carts: Cart[]
 }

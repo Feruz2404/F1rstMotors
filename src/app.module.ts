@@ -37,6 +37,7 @@ import { CustomerSupport } from './customer_support/models/customer_support.mode
 import { Cart } from './cart/models/cart.model';
 import { ClientModule } from './clients/client.module';
 import { Otp } from './auth/models/otp.model';
+import { Admin } from './admin/models/admin.model';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { Otp } from './auth/models/otp.model';
       password: process.env.POSTGRES_PASSWORD || "root",
       database: process.env.POSTGRES_DB || "first_motors",
       models: [
+        Admin,
         Brand,
         Branch,
         CarInventory,

@@ -5,19 +5,19 @@ import {
 } from "@nestjs/common";
 import { JwtPayload, JwtPayloadWithRefreshToken } from "../types";
 
-export const GetCurrentUser = createParamDecorator(
+export const GetCurrentClient = createParamDecorator(
   (data: keyof JwtPayloadWithRefreshToken, context: ExecutionContext) => {
     const request = context.switchToHttp().getRequest();
-    const user = request.user as JwtPayload;
+    const client = request.client as JwtPayload;
 
-    if (!user) {
+    if (!client) {
       throw new ForbiddenException("Token noto'g'ri");
     }
 
     if (!data) {
-      return user
+      return client
     }
 
-    return user[data];
+    return client[data];
   }
 );

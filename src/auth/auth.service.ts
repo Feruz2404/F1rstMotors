@@ -16,11 +16,11 @@ import { Response } from 'express';
 import { SignInAdminDto, SignInClientDto } from './dto';
 import { ClientService } from '../clients/client.service';
 import { Client } from '../clients/models/client.model';
-import { Otp } from './models/otp.model';
 import { CreateClientDto } from '../clients/dto/create-client.dto';
 import { generateOTP } from '../helpers/generate-otp';
 import { MailService } from '../mail/mail.service';
 import { InjectModel } from '@nestjs/sequelize';
+import { Otp } from './models/otp.model';
 import { AddMinutesToDate } from '../helpers/addMinutes';
 import * as uuid from 'uuid';
 import { timestamp } from 'rxjs';
@@ -38,7 +38,7 @@ export class AuthService {
     private readonly mailService: MailService,
   ) {}
 
-  //                        Auth Admin
+  // ------------------------- Admin Auth --------------------------------
 
   async generateAdminTokens(admin: Admin): Promise<Tokens> {
     const payload = {
@@ -174,8 +174,7 @@ export class AuthService {
     }
   }
 
-//                          Auth Client
-
+  // ------------------------- Client Auth -----------------------
   async generateClientTokens(client: Client): Promise<Tokens> {
     const payload = {
       id: client.id,
